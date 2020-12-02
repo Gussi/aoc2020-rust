@@ -1,4 +1,3 @@
-use std::collections::HashSet;
 use clap::{Arg, App};
 
 fn main() {
@@ -16,14 +15,21 @@ fn main() {
              .index(2))
         .get_matches();
 
-    let day: i32 = matches.value_of("DAY").unwrap().parse().unwrap();
-    let part: i32 = matches.value_of("PART").unwrap().parse().unwrap();
+    let day: i32 = matches.value_of("DAY")
+        .unwrap()
+        .parse()
+        .unwrap();
+
+    let part: i32 = matches.value_of("PART")
+        .unwrap()
+        .parse()
+        .unwrap();
 
     match day {
         1 => {
             match part {
-                1 => println!("part 1 answer: {}", part1()),
-                2 => println!("part 2 answer: {}", part2()),
+                1 => println!("part 1 answer: {}", aoc2020::day1::part1()),
+                2 => println!("part 2 answer: {}", aoc2020::day1::part2()),
                 _ => println!("Part {} not found!", part),
             }
         },
@@ -32,61 +38,68 @@ fn main() {
 
 }
 
-fn part1() -> i32 {
-    let input = input();
+mod aoc2020 {
+    pub mod day1 {
+        use std::collections::HashSet;
 
-    for x in &input {
-        let y = 2020 - x;
+        pub fn part1() -> i32 {
+            let input = input();
 
-        if input.contains(&y) {
-            return x * y;
-        }
-    }
+            for x in &input {
+                let y = 2020 - x;
 
-    0
-}
-
-fn part2() -> i32 {
-    let input = input();
-
-    for x in &input {
-        for y in &input {
-            let z = 2020 - (x + y);
-
-            if input.contains(&z) {
-                return x * y * z;
+                if input.contains(&y) {
+                    return x * y;
+                }
             }
-        }
-    }
 
-    0
-}
-
-fn input() -> HashSet<i32> {
-    let mut set = HashSet::new();
-
-    loop {
-        let mut input = String::new();
-
-        std::io::stdin()
-            .read_line(&mut input)
-            .unwrap();
-
-        let n = input
-            .trim()
-            .parse::<i32>();
-
-        let t = match n {
-            Ok(v) => v,
-            Err(_e) => 0,
-        };
-
-        if t == 0 {
-            break;
+            0
         }
 
-        set.insert(t);
-    }
+        pub fn part2() -> i32 {
+            let input = input();
 
-    set
+            for x in &input {
+                for y in &input {
+                    let z = 2020 - (x + y);
+
+                    if input.contains(&z) {
+                        return x * y * z;
+                    }
+                }
+            }
+
+            0
+        }
+
+        fn input() -> HashSet<i32> {
+            let mut set = HashSet::new();
+
+            loop {
+                let mut input = String::new();
+
+                std::io::stdin()
+                    .read_line(&mut input)
+                    .unwrap();
+
+                let n = input
+                    .trim()
+                    .parse::<i32>();
+
+                let t = match n {
+                    Ok(v) => v,
+                    Err(_e) => 0,
+                };
+
+                if t == 0 {
+                    break;
+                }
+
+                set.insert(t);
+            }
+
+            set
+        }
+    }
 }
+
