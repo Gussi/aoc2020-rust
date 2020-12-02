@@ -2,7 +2,7 @@
 Advent of Code solutions written in Rust
 
 ## Setup
-`composer build`
+`cargo build`
 
 ## Solve puzzles
 `cargo run -- <day> <part> < input_file.txt`
