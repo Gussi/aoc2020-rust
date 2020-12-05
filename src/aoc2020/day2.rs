@@ -33,7 +33,7 @@ impl PasswordPolicy {
 pub fn part1() -> Result<i32, &'static str> {
     let mut valid = 0;
 
-    let input = input();
+    let input = input().unwrap();
 
     for policy in &input {
         if policy.valid_first_rule() {
@@ -47,7 +47,7 @@ pub fn part1() -> Result<i32, &'static str> {
 pub fn part2() -> Result<i32, &'static str> {
     let mut valid = 0;
 
-    let input = input();
+    let input = input().unwrap();
 
     for policy in &input {
         if policy.valid_second_rule() {
@@ -58,23 +58,21 @@ pub fn part2() -> Result<i32, &'static str> {
     Ok(valid)
 }
 
-fn input() -> Vec<PasswordPolicy> {
+fn input() -> Result<Vec<PasswordPolicy>, &'static str> {
     let mut vec: Vec<PasswordPolicy> = Vec::new();
 
-    let re = Regex::new(r"(\d+)-(\d+) (\w): (.+)").unwrap();
+    let re = Regex::new(r"(\d+)-(\d+) (\w): (.+)").expect("Invalid regex rule");
 
     loop {
         let mut input = String::new();
 
-        std::io::stdin()
-            .read_line(&mut input)
-            .unwrap();
+        std::io::stdin().read_line(&mut input).expect("Unable to read from stdin");
 
         if input.trim().is_empty() {
             break;
         }
 
-        let caps = re.captures(&input).unwrap();
+        let caps = re.captures(&input).expect("Unable to process regex on input line");
 
         let policy = PasswordPolicy {
             a       : caps.get(1).unwrap().as_str().parse().unwrap(),
@@ -86,5 +84,5 @@ fn input() -> Vec<PasswordPolicy> {
         vec.push(policy);
     }
 
-    vec
+    Ok(vec)
 }

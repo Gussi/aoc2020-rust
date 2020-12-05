@@ -30,8 +30,8 @@ fn main() {
     match day {
         1 => {
             match part {
-                1 => println!("part 1 answer: {}", aoc2020::day1::part1()),
-                2 => println!("part 2 answer: {}", aoc2020::day1::part2()),
+                1 => println!("part 1 answer: {}", aoc2020::day1::part1().unwrap()),
+                2 => println!("part 2 answer: {}", aoc2020::day1::part2().unwrap()),
                 _ => println!("Part {} not found!", part),
             }
         },
@@ -39,6 +39,13 @@ fn main() {
             match part {
                 1 => println!("part 1 answer: {}", aoc2020::day2::part1().unwrap()),
                 2 => println!("part 2 answer: {}", aoc2020::day2::part2().unwrap()),
+                _ => println!("Part {} not found!", part),
+            }
+        },
+        3 => {
+            match part {
+                1 => println!("part 1 answer: {}", aoc2020::day3::part1().unwrap()),
+                2 => println!("part 2 answer: {}", aoc2020::day3::part2().unwrap()),
                 _ => println!("Part {} not found!", part),
             }
         },
