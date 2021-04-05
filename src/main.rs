@@ -49,6 +49,13 @@ fn main() {
                 _ => println!("Part {} not found!", part),
             }
         },
+        4 => {
+            match part {
+                1 => println!("part 1 answer: {}", aoc2020::day4::part1().unwrap()),
+                2 => println!("part 2 answer: {}", aoc2020::day4::part2().unwrap()),
+                _ => println!("Part {} not found!", part),
+            }
+        },
         _ => println!("Day {} not found!", day),
     }
 
